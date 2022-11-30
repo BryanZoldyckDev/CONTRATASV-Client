@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { getEnvVariables } from '../utils/helpers';
+//import { getEnvVariables } from '../utils/helpers';
 
-const { VITE_BASE_URL } = getEnvVariables()
+// const { VITE_BASE_URL } = getEnvVariables()
 
 const API = axios.create({
-	baseURL: VITE_BASE_URL
+	baseURL: import.meta.VITE_BASE_URL
 });
 
 API.interceptors.request.use( config => {
