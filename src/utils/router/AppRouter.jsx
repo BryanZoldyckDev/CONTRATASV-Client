@@ -11,22 +11,39 @@ import RegisterForm from '../../contrata-sv/pages/register/registerForm.jsx';
 import TalentP from '../../contrata-sv/pages/talentPage/talentP.jsx';
 import ActP from '../../contrata-sv/pages/talentPage/actividades/actPA.jsx';
 import OfferPage from '../../contrata-sv/pages/talentPage/actividades/Ofertas/offerPage.jsx';
-import OfferPageArc from '../../contrata-sv/pages/talentPage/actividades/Ofertas/offerPageArc.jsx';
 import ContracsPageAct from '../../contrata-sv/pages/talentPage/actividades/Contratos/contracsPageAct.jsx';
-import ContracsHistorial from '../../contrata-sv/pages/talentPage/actividades/Contratos/contratosHistorial.jsx';
 import SolicitudesP from '../../contrata-sv/pages/talentPage/solicitudes/soliP.jsx';
-import SolicitudesR from '../../contrata-sv/pages/talentPage/solicitudes/soliR.jsx';
-import ProfileTalent from '../../contrata-sv/pages/talentPage/profileTalent.jsx';
 import UserP from '../../contrata-sv/pages/userPage/userP.jsx';
 import ContratosUser from '../../contrata-sv/pages/userPage/contratos/contratosUA.jsx';
-import ContratosUserHistorial from '../../contrata-sv/pages/userPage/contratos/contratosUH.jsx';
 import ServiciosUser from '../../contrata-sv/pages/userPage/servicios/serviciosU.jsx';
 import SolicitudesUser from '../../contrata-sv/pages/userPage/solicitudes/solicitudesUP.jsx';
-import SolicitudesUserR from '../../contrata-sv/pages/userPage/solicitudes/solicitudesUR.jsx';
 import ProfileUser from '../../contrata-sv/pages/userPage/profileUser.jsx';
 
 import Footer from '../../contrata-sv/components/footer/footer.jsx';
 import Header from '../../contrata-sv/components/header/header.jsx';
+import { PrivateRoute } from './PrivateRoute.jsx';
+import { ROLES } from '../constants/index.js';
+import { PublicRoute } from './PublicRoute.jsx';
+
+const publicRoutes = [
+	{ path: '/', element: <InicialPage /> },
+	{ path: '/login', element: <Login /> },
+	{ path: '/register', element: <RegisterMain /> },
+	{ path: '/register/:type', element: <RegisterForm /> },
+];
+
+const privateRoutes = [
+	{ path: '/contratist', element: <TalentP />, type: ROLES.contratist },
+	{ path: '/contratist/activities', element: <ActP />, type: ROLES.contratist },
+	{ path: '/contratist/activities/offers/:status', element: <OfferPage />, type: ROLES.contratist },
+	{ path: '/contratist/activities/contracts/:status', element: <ContracsPageAct />, type: ROLES.contratist },
+	{ path: '/contratist/requests/:status', element: <SolicitudesP />, type: ROLES.contratist },
+	{ path: 'profile', element: <ProfileUser /> },
+	{ path: '/client', element: <UserP />, type: ROLES.client },
+	{ path: '/client/contracts/:status', element: <ContratosUser />, type: ROLES.client },
+	{ path: '/client/services', element: <ServiciosUser />, type: ROLES.client },
+	{ path: '/client/requests/:status', element: <SolicitudesUser />, type: ROLES.client },
+];
 
 export const AppRouter = () => {
 	
@@ -35,30 +52,30 @@ export const AppRouter = () => {
 			<BrowserRouter>
 				<Header/>
 				<Routes>
-					<Route path="/" element={<InicialPage />}/>
-					<Route path="*" element={<Error />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/register" element={<RegisterMain />} />
-					<Route path="/register/client" element={<RegisterForm />} />
-					<Route path="/register/contratist" element={<RegisterForm />} />
-					{/* Pagina de Talento */}
-					<Route path="/contratist" element={<TalentP />} />
-					<Route path="/contratist/activities" element={<ActP />} />
-					<Route path="/contratist/activities/offers/active" element={<OfferPage />} />
-					<Route path="/contratist/activities/offers/archived" element={<OfferPageArc />} />
-					<Route path="/contratist/activities/contracts/active" element={<ContracsPageAct />} />
-					<Route path="/contratist/activities/contracts/history" element={<ContracsHistorial />} />
-					<Route path="/contratist/requests/pending" element={<SolicitudesP />} />
-					<Route path="/contratist/requests/declined" element={<SolicitudesR />} />
-					<Route path="/contratist/profile" element={<ProfileTalent />} />
-					{/* Pagina de Usuario */}
-					<Route path="/client" element={<UserP />} />
-					<Route path="/client/contracts/active" element={<ContratosUser />} />
-					<Route path="/client/contracts/history" element={<ContratosUserHistorial />} />
-					<Route path="/client/services" element={<ServiciosUser />} />
-					<Route path="/client/requests/pending" element={<SolicitudesUser />} />
-					<Route path="/client/requests/declined" element={<SolicitudesUserR />} />
-					<Route path="/client/profile" element={<ProfileUser />} />
+					<Route
+						path="*"
+						element={ <Error/> }
+					/>
+					{
+						/* Paginas Públicas */
+						publicRoutes.map((route, index) => (
+							<Route
+								key={index}
+								path={route.path}
+								element={ <PublicRoute> {route.element} </PublicRoute> }
+							/>
+						))
+					}
+					{
+						/* Páginas Privadas */
+						privateRoutes.map((route, index) => (
+							<Route
+								key={index}
+								path={route.path}
+								element={ <PrivateRoute type={route.type}> {route.element} </PrivateRoute> }
+							/>
+						))
+					}
 				</Routes>
 				<Footer />
 			</BrowserRouter>

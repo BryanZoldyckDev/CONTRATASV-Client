@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BACK_ROLES, ROLES } from '../../../utils/constants/index.js';
 import { useAuthStore } from '../../../utils/hooks/index.js';
 import { clientLinks, contratistLinks, notSignedInLinks } from './menu-links.js';
@@ -20,12 +20,12 @@ const Header = () => {
 	
 	const [ showMenu, setShowMenu ] = useState(false);
 	const { startLogout, user } = useAuthStore();
-	
-	if(user && user?.role?.name === ROLES.client){
+
+	if(user && user?.role?.name === ROLES.client) {
 		links = clientLinks;
 	}
 	
-	else if(user && user?.role?.name === ROLES.contratist){
+	else if(user && user?.role?.name === ROLES.contratist) {
 		links = contratistLinks;
 	}
 	
