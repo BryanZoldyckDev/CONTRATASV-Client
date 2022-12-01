@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../store/index.js';
 
-import HomePage from '../../contrata-sv/pages/home/HomePage.jsx';
-import Error from '../../contrata-sv/pages/404/notFound.jsx';
-import Login from '../../contrata-sv/pages/login/login.jsx';
-import RegisterMain from '../../contrata-sv/pages/register/registerMain.jsx';
-import RegisterForm from '../../contrata-sv/pages/register/registerForm.jsx';
+import HomePage from '../../contrata-sv/pages/shared/home/HomePage.jsx';
+import Error from '../../contrata-sv/pages/shared/404/notFound.jsx';
+import Login from '../../contrata-sv/pages/public/login/login.jsx';
+import RegisterMain from '../../contrata-sv/pages/public/register/registerMain.jsx';
+import RegisterForm from '../../contrata-sv/pages/public/register/registerForm.jsx';
 import ActP from '../../contrata-sv/pages/talentPage/actividades/actPA.jsx';
 import OfferPage from '../../contrata-sv/pages/talentPage/actividades/Ofertas/offerPage.jsx';
 import ContracsPageAct from '../../contrata-sv/pages/talentPage/actividades/Contratos/contracsPageAct.jsx';
@@ -16,30 +16,35 @@ import ContratosUser from '../../contrata-sv/pages/userPage/contratos/contratosU
 import ServiciosUser from '../../contrata-sv/pages/userPage/servicios/serviciosU.jsx';
 import SolicitudesUser from '../../contrata-sv/pages/userPage/solicitudes/solicitudesUP.jsx';
 import ProfileUser from '../../contrata-sv/pages/userPage/profileUser.jsx';
+import OffersPage from '../../contrata-sv/pages/contratist/offers/offers.jsx';
 
 import Footer from '../../contrata-sv/components/footer/footer.jsx';
 import Header from '../../contrata-sv/components/header/header.jsx';
 import { PrivateRoute } from './PrivateRoute.jsx';
 import { ROLES } from '../constants/index.js';
 import { PublicRoute } from './PublicRoute.jsx';
+import { ROUTES } from './routes.js';
+import Offer from '../../contrata-sv/pages/contratist/offer/offer.jsx';
 
 const publicRoutes = [
 	{ path: '/', element: <HomePage /> },
-	{ path: '/login', element: <Login /> },
-	{ path: '/register', element: <RegisterMain /> },
+	{ path: ROUTES.loginPage, element: <Login /> },
+	{ path: ROUTES.registerPage, element: <RegisterMain /> },
 	{ path: '/register/:type', element: <RegisterForm /> },
 ];
 
 const privateRoutes = [
-	{ path: '/contratist', element: <HomePage />, type: ROLES.contratist },
-	{ path: '/contratist/activities', element: <ActP />, type: ROLES.contratist },
+	{ path: ROUTES.contratistPage, element: <HomePage />, type: ROLES.contratist },
+	{ path: ROUTES.contratistOfferPage, element: <Offer />, type: ROLES.contratist },
+	{ path: ROUTES.contratistOffersPage, element: <OffersPage />, type: ROLES.contratist },
+	{ path: ROUTES.contratistActivitiesPage, element: <ActP />, type: ROLES.contratist },
 	{ path: '/contratist/activities/offers/:status', element: <OfferPage />, type: ROLES.contratist },
 	{ path: '/contratist/activities/contracts/:status', element: <ContracsPageAct />, type: ROLES.contratist },
 	{ path: '/contratist/requests/:status', element: <SolicitudesP />, type: ROLES.contratist },
-	{ path: 'profile', element: <ProfileUser /> },
-	{ path: '/client', element: <HomePage />, type: ROLES.client },
+	{ path: ROUTES.profilePage, element: <ProfileUser /> },
+	{ path: ROUTES.clientPage, element: <HomePage />, type: ROLES.client },
 	{ path: '/client/contracts/:status', element: <ContratosUser />, type: ROLES.client },
-	{ path: '/client/services', element: <ServiciosUser />, type: ROLES.client },
+	{ path: ROUTES.clientServicesPage, element: <ServiciosUser />, type: ROLES.client },
 	{ path: '/client/requests/:status', element: <SolicitudesUser />, type: ROLES.client },
 ];
 

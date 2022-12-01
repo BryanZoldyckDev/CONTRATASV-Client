@@ -1,4 +1,4 @@
-import { API } from '../../../api/index.js';
+import { API } from '../../../../api/index.js';
 
 export class ProffesionService {
 	static async getProffesions(callback) {
@@ -12,12 +12,5 @@ export class ProffesionService {
 				label: profession?.name
 			}
 		}));
-		
-		return data?.professions.map((profession) => {
-			return {
-				value: profession?.name,
-				label: profession?.name
-			}
-		});
 	}
 }

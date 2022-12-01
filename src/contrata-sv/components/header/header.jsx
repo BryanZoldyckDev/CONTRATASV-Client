@@ -34,7 +34,7 @@ const Header = () => {
 	}
 	
 	return (
-		<nav className='sticky top-0 left-0 bg-green-800 w-full shadow'>
+		<nav className='sticky bg-green-800 w-full shadow'>
 			<div className='container m-auto flex justify-between items-center text-white'>
 				<Link to={ user && user?.role?.name === ROLES.client || user && user?.role?.name === ROLES.contratist ? BACK_ROLES[user?.role?.name] : '/' } className="flex flex-row pl-8 py-4 text-xl font-bold">CONTRATA<h1 className="text-green-500">SV</h1></Link>
 				<ul className="hidden md:flex items-center pr-10 text-base cursor-pointer">

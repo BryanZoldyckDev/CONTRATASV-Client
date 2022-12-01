@@ -20,23 +20,23 @@ export const clientLinks = [
 		name: "Servicios",
 		url: ROUTES.clientServicesPage
 	},
-	{
-		name: "Solicitudes",
-		url: ROUTES.clientRequestsPendingPage
-	},
+	// {
+	// 	name: "Solicitudes",
+	// 	url: ROUTES.clientRequestsPendingPage
+	// },
 ];
 
 export const contratistLinks = [
 	{
-		name: "Actividad",
-		url: ROUTES.contratistActivitiesPage
+		name: "Ofertas",
+		url: ROUTES.contratistOffersPage
 	},
 	{
 		name: "Perfil",
 		url: ROUTES.profilePage
 	},
-	{
-		name: "Solicitudes",
-		url: ROUTES.contratistRequestsPendingPage
-	},
+	// {
+	// 	name: "Solicitudes",
+	// 	url: ROUTES.contratistRequestsPendingPage
+	// },
 ];

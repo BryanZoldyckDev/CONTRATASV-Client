@@ -3,10 +3,10 @@ import Swal from 'sweetalert2';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { RegisterFormFields } from './registerForm.js';
-import { ROUTES } from '../../../utils/router/routes.js';
-import { BACK_ROLES, ROLES } from '../../../utils/constants/index.js';
-import { useAuthStore, useForm } from '../../../utils/hooks/index.js';
+import { RegisterFormFields } from './registerFormFields.js';
+import { ROUTES } from '../../../../utils/router/routes.js';
+import { BACK_ROLES, ROLES } from '../../../../utils/constants/index.js';
+import { useAuthStore, useForm } from '../../../../utils/hooks/index.js';
 import { ProffesionService } from './proffesion.service.js';
 import Select from 'react-select';
 

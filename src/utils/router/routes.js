@@ -16,6 +16,9 @@ export class ROUTES {
 	static contratistRequestsPendingPage = '/contratist/requests/pending';
 	static contratistRequestsDeclinedPage = '/contratist/requests/declined';
 	
+	static contratistOffersPage = '/contratist/offers';
+	static contratistOfferPage = '/contratist/offer';
+	
 	static profilePage = '/profile';
 	
 	static clientPage = '/client';
