@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuthStore, useForm } from '../../../utils/hooks/index.js';
 
 import { RegisterFormFields } from './registerForm.js';
-import { BACK_ROLES, ROLES } from '../../../utils/constants/index.js';
 import { ROUTES } from '../../../utils/router/routes.js';
+import { BACK_ROLES, ROLES } from '../../../utils/constants/index.js';
+import { useAuthStore, useForm } from '../../../utils/hooks/index.js';
+import { ProffesionService } from './proffesion.service.js';
+import Select from 'react-select';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -24,6 +26,7 @@ const RegisterForm = () => {
     registerBirthDate,
     registerResidence,
     registerDescription,
+    registerProfessions,
     onInputChange:onRegisterInputChange
   } = useForm( RegisterFormFields.formFields );
   
@@ -32,8 +35,8 @@ const RegisterForm = () => {
     
     let errorMsg = '';
     
-    if(RegisterFormFields.birthDateValidation(registerBirthDate)) {
-      errorMsg += 'La fecha de nacimiento debe ser coherente.';
+    if(!RegisterFormFields.birthDateValidation(registerBirthDate)) {
+      errorMsg += 'La fecha de nacimiento debe estar entre 1950-01-01 y 2002-11-25.';
     }
   
     if(RegisterFormFields.phoneValidation(registerPhone)) {
@@ -68,7 +71,8 @@ const RegisterForm = () => {
       phone: registerPhone,
       birthdate: registerBirthDate,
       residence: registerResidence,
-      description: registerResidence
+      description: registerResidence,
+      profession: registerProfessions.map((profession)=>profession.value)
     });
   }
 
@@ -79,16 +83,27 @@ const RegisterForm = () => {
     if( errorMessage === 'SUCCESS' ){
       const user = JSON.parse(localStorage.getItem('user'));
       Swal.fire('¡Bienvenido a ContrataSV!', '', 'success').then(()=>{
-        navigate(`/${BACK_ROLES[user?.role?.name]}-page`);
+        navigate(`/${BACK_ROLES[user?.role?.name]}`);
       });
     }
-  }, [errorMessage])
-
+  }, [errorMessage]);
+  
+  const [options, setOptions] = useState([""]);
+  
+  useEffect(() => {
+    const getData = async () => {
+      await ProffesionService.getProffesions((options) => {
+        setOptions(options)
+      });
+    };
+    getData();
+  }, []);
+  
   return(
     <main className="flex justify-center items-center bg-slate-200">
       <div id="form" className="block bg-slate-50 p-6 rounded-xl shodow-md shadow-slate-300 w-90">
         <form onSubmit={ registerSubmit }>
-          <h2 className="text-green-700 text-4xl font-semibold my-4">Cuéntanos un poco más acerca de ti</h2>
+          <h2 className="text-green-700 text-4xl font-semibold my-4">Cuéntanos sobre ti</h2>
           <div className="flex flex-row">
             <div id="firstName" className="w-1/2 mr-1">
                 <label className="text-sm">Primer nombre</label><br/>
@@ -113,7 +128,6 @@ const RegisterForm = () => {
                   className="h-10 w-full rounded-md border border-slate-300 text-sm pl-2 bg-transparent outline-green-600 shadow-sm"/>
             </div>
           </div>
-  
           <div className="flex flex-row flex-wrap mt-2">
             <div className="sm:w-1/3 w-full sm:pr-2 pr-0">
               <label className="text-sm">Fecha de Nacimiento</label><br/>
@@ -166,6 +180,26 @@ const RegisterForm = () => {
               required="required"
               className="h-10 w-full rounded-md border border-slate-300 text-sm pl-2 bg-transparent outline-green-600 shadow-sm"/>
           </div>
+  
+          {
+            location === BACK_ROLES.CONTRATIST_ROLE ?
+              <div className="mt-2">
+                <label className="mt-2 text-sm">Profesiones</label><br/>
+                <Select
+                  isMulti
+                  options={ options }
+                  name="registerProfessions"
+                  value={ registerProfessions }
+                  onChange={ (value, event) => {
+                    if(event.action === 'select-option')
+                    onRegisterInputChange({target: { name: 'registerProfessions', value }})
+                  } }
+                  placeholder= "Selecciona una profesión"
+                  noOptionsMessage={() => "La profesión no existe"}
+                />
+              </div>
+              : ''
+          }
   
           <div className="mt-2">
             <label className="mt-2 text-sm">Descripción</label><br/>

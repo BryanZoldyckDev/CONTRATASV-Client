@@ -9,7 +9,8 @@ export class RegisterFormFields {
 		registerResidence: '',
 		registerDescription: '',
 		registerPassword: '',
-		confirmPassword: ''
+		confirmPassword: '',
+		registerProfessions: []
 	}
 	
 	static tab = 'Tab';
@@ -22,7 +23,7 @@ export class RegisterFormFields {
 	static duiValidation = (registerDui) => registerDui.length !== 9;
 	static phoneValidation = (registerPhone) => registerPhone.length !== 8;
 	static passwordValidation = (registerPassword, confirmPassword) => registerPassword !== confirmPassword;
-	static birthDateValidation = (registerBirthDate) => !(new Date(registerBirthDate) > this.min && this.max < new Date(registerBirthDate));
+	static birthDateValidation = (registerBirthDate) => new Date(registerBirthDate) > this.min && this.max < new Date(registerBirthDate);
 	
 	static calendarKeyDown = (e) => {
 		e.preventDefault();

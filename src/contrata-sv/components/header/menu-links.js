@@ -14,7 +14,7 @@ export const clientLinks = [
 	},
 	{
 		name: "Perfil",
-		url: ROUTES.clientProfilePage
+		url: ROUTES.profilePage
 	},
 	{
 		name: "Servicios",
@@ -33,7 +33,7 @@ export const contratistLinks = [
 	},
 	{
 		name: "Perfil",
-		url: ROUTES.contratistProfilePage
+		url: ROUTES.profilePage
 	},
 	{
 		name: "Solicitudes",

@@ -15,13 +15,13 @@ export class ROUTES {
 	static contratistActivitiesContractsArchivedPage = '/contratist/activities/contracts/history';
 	static contratistRequestsPendingPage = '/contratist/requests/pending';
 	static contratistRequestsDeclinedPage = '/contratist/requests/declined';
-	static contratistProfilePage = '/contratist/profile';
-
+	
+	static profilePage = '/profile';
+	
 	static clientPage = '/client';
 	static clientContractsActivePage = '/client/contracts/active';
 	static clientContractsHistoryPage = '/client/contracts/history';
 	static clientServicesPage = '/client/services';
 	static clientRequestsPendingPage = '/client/requests/pending';
 	static clientRequestsDeclinedPage = '/client/requests/declined';
-	static clientProfilePage = '/client/profile';
 }

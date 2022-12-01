@@ -36,10 +36,10 @@ export const useAuthStore = () => {
         }
     }
 
-    const startRegister = async({name, lastname, email, password, role, dui, phone, birthdate, residence, description}) => {
+    const startRegister = async({name, lastname, email, password, role, dui, phone, birthdate, residence, description, profession}) => {
         dispatch( onChecking() );
         try {
-            const { data } = await API.post('/users',{name, lastname, email, password, role, dui, phone, birthdate, residence, description});
+            const { data } = await API.post('/users',{name, lastname, email, password, role, dui, phone, birthdate, residence, description, profession});
             localStorage.setItem('token', data.token );
             localStorage.setItem('token-init-date', new Date().getTime() );
             dispatch( onLogin(data.user) );
@@ -47,7 +47,7 @@ export const useAuthStore = () => {
                 dispatch( clearErrorMessage() );
             }, 10);
         } catch (error) {
-            dispatch( onLogout( error.response?.data?.msg || '--' ) );
+            dispatch( onLogout( error.response?.data?.msg || 'Ocurrió un error' ) );
             setTimeout(() => {
                 dispatch( clearErrorMessage() );
             }, 10);
