@@ -37,18 +37,18 @@ const Header = () => {
 		<nav className='sticky top-0 left-0 bg-green-800 w-full shadow'>
 			<div className='container m-auto flex justify-between items-center text-white'>
 				<Link to={ user && user?.role?.name === ROLES.client || user && user?.role?.name === ROLES.contratist ? BACK_ROLES[user?.role?.name] : '/' } className="flex flex-row pl-8 py-4 text-xl font-bold">CONTRATA<h1 className="text-green-500">SV</h1></Link>
-				<ul className="hidden md:flex items-center pr-10 text-base font-semibold cursor-pointer">
+				<ul className="hidden md:flex items-center pr-10 text-base cursor-pointer">
 					{links.map((link, index) => (
 						<li className="px-4 py-4 hover:bg-green-700" key={index} onClick={EnterHandler.bind(this, link.url)}>{link.name}</li>
 					))}
 					{
 						user && user?.role?.name === ROLES.client || user && user?.role?.name === ROLES.contratist
 							?
-							<div className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded" onClick={startLogout}>
+							<div className="bg-green-700 hover:bg-green-900 text-white py-2 px-4 rounded" onClick={startLogout}>
 								<h2>Cerrar sesión</h2>
 							</div>
 							:
-							<div className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded" onClick={EnterHandler.bind(this, 'register')}>
+							<div className="bg-green-700 hover:bg-green-900 text-white py-2 px-4 rounded" onClick={EnterHandler.bind(this, 'register')}>
 								<h2>Registrarse</h2>
 							</div>
 					}
@@ -64,11 +64,11 @@ const Header = () => {
 							{
 								user && user?.role?.name === ROLES.client || user && user?.role?.name === ROLES.contratist
 									?
-									<div className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded" onClick={startLogout}>
+									<div className="bg-green-700 hover:bg-green-900 text-white py-2 px-4 rounded" onClick={startLogout}>
 										<h2>Cerrar sesión</h2>
 									</div>
 									:
-									<div className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded" onClick={EnterHandler.bind(this, 'register')}>
+									<div className="bg-green-700 hover:bg-green-900 text-white py-2 px-4 rounded" onClick={EnterHandler.bind(this, 'register')}>
 										<h2>Registrarse</h2>
 									</div>
 							}

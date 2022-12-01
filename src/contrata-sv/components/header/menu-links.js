@@ -21,7 +21,7 @@ export const clientLinks = [
 		url: ROUTES.clientServicesPage
 	},
 	{
-		name: "Solictudes",
+		name: "Solicitudes",
 		url: ROUTES.clientRequestsPendingPage
 	},
 ];

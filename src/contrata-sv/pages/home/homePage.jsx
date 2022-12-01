@@ -1,9 +1,9 @@
 //pagina inicial para poner una imagen
 import React from 'react';
 
-const InicialPage = () => {
+const HomePage = () => {
   return (
-    <main className="pt-20">
+    <main className="pt-10 sm:pt-10 md:pt-0 lg:pt-20">
       <div className="px-4 sm:px-8 mx-auto grid grid-cols-12 gap-x-6 overflow-hidden">
         <div className="col-span-12 lg:col-span-6 mt-12 xl:mt-10 space-y-4 sm:space-y-6 px-6 text-center sm:text-left">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl xl:text-6xl">
@@ -26,5 +26,4 @@ const InicialPage = () => {
   );
 }
 
-export default InicialPage;
-
+export default HomePage;
