@@ -42,23 +42,23 @@ export const AppRouter = () => {
 					<Route path="/register/client" element={<RegisterForm />} />
 					<Route path="/register/contratist" element={<RegisterForm />} />
 					{/* Pagina de Talento */}
-					<Route path="/contratist-page" element={<TalentP />} />
-					<Route path="/contratist-page/activities" element={<ActP />} />
-					<Route path="/contratist-page/activities/offers/active" element={<OfferPage />} />
-					<Route path="/contratist-page/activities/offers/archived" element={<OfferPageArc />} />
-					<Route path="/contratist-page/activities/contracts/active" element={<ContracsPageAct />} />
-					<Route path="/contratist-page/activities/contracts/history" element={<ContracsHistorial />} />
-					<Route path="/contratist-page/requests/pending" element={<SolicitudesP />} />
-					<Route path="/contratist-page/requests/declined" element={<SolicitudesR />} />
-					<Route path="/contratist-page/profile" element={<ProfileTalent />} />
+					<Route path="/contratist" element={<TalentP />} />
+					<Route path="/contratist/activities" element={<ActP />} />
+					<Route path="/contratist/activities/offers/active" element={<OfferPage />} />
+					<Route path="/contratist/activities/offers/archived" element={<OfferPageArc />} />
+					<Route path="/contratist/activities/contracts/active" element={<ContracsPageAct />} />
+					<Route path="/contratist/activities/contracts/history" element={<ContracsHistorial />} />
+					<Route path="/contratist/requests/pending" element={<SolicitudesP />} />
+					<Route path="/contratist/requests/declined" element={<SolicitudesR />} />
+					<Route path="/contratist/profile" element={<ProfileTalent />} />
 					{/* Pagina de Usuario */}
-					<Route path="/client-page" element={<UserP />} />
-					<Route path="/client-page/contracts/active" element={<ContratosUser />} />
-					<Route path="/client-page/contracts/history" element={<ContratosUserHistorial />} />
-					<Route path="/client-page/services" element={<ServiciosUser />} />
-					<Route path="/client-page/requests/pending" element={<SolicitudesUser />} />
-					<Route path="/client-page/requests/declined" element={<SolicitudesUserR />} />
-					<Route path="/client-page/profile" element={<ProfileUser />} />
+					<Route path="/client" element={<UserP />} />
+					<Route path="/client/contracts/active" element={<ContratosUser />} />
+					<Route path="/client/contracts/history" element={<ContratosUserHistorial />} />
+					<Route path="/client/services" element={<ServiciosUser />} />
+					<Route path="/client/requests/pending" element={<SolicitudesUser />} />
+					<Route path="/client/requests/declined" element={<SolicitudesUserR />} />
+					<Route path="/client/profile" element={<ProfileUser />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>

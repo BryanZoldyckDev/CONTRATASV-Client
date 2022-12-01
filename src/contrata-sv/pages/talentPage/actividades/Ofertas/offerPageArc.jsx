@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { ROUTES } from '../../../../../utils/router/routes.js';
 
 const OfferPageArc = () => {
 
@@ -12,10 +13,10 @@ const OfferPageArc = () => {
             <div className="flex flex-col justify-center items-center snap-y h-screen w-screen overflow-scroll">
                 <div className="bg-white rounded-lg shadow-lg p-8 m-4">
                     <div className="flex justify-between items-center">
-                        <Link to="/talentPage/actividades/ofertas/activas" className="py-2 px-4 rounded bg-white hover:bg-gray-500 text-black font-bold">
+                        <Link to={ROUTES.contratistActivitiesOffersActivePage} className="py-2 px-4 rounded bg-white hover:bg-gray-500 text-black font-bold">
                             Activas
                         </Link>
-                        <Link to="/talentPage/actividades/ofertas/archivadas" className="py-2 px-4 rounded   bg-green-700 hover:bg-green-900  text-white font-bold">
+                        <Link to={ROUTES.contratistActivitiesOffersArchivedPage} className="py-2 px-4 rounded   bg-green-700 hover:bg-green-900  text-white font-bold">
                             Archivadas
                         </Link>
                     </div>

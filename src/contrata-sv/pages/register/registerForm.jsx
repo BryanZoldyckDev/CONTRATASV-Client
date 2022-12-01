@@ -1,76 +1,59 @@
 import React from 'react';
+import Swal from 'sweetalert2';
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore, useForm } from '../../../utils/hooks/index.js';
-import { useEffect } from 'react';
-import Swal from 'sweetalert2';
-import { BACK_ROLES, ROLES } from '../../../utils/constants/index.js';
 
-const registerFormFields = {
-  registerName: '',
-  registerLastName: '',
-  registerEmail: '',
-  registerDui: '',
-  registerPhone: '',
-  registerBirthDate: '',
-  registerResidence: '',
-  registerDescription: '',
-  registerPassword: '',
-  confirmPassword: ''
-}
+import { RegisterFormFields } from './registerForm.js';
+import { BACK_ROLES, ROLES } from '../../../utils/constants/index.js';
+import { ROUTES } from '../../../utils/router/routes.js';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
   const location = useLocation().pathname.split('/')[2];
-  
-  const calendarKeyDown = (e) => {
-    e.preventDefault();
-  }
-  
-  const duiKeyDown = (e) => {
-    if(registerDui.length >= 9){
-      e.preventDefault();
-    }
-  }
-  
-  const phoneKeyDown = (e) => {
-    if(registerPhone.length >= 8){
-      e.preventDefault();
-    }
-  }
-
   const { startRegister, errorMessage } = useAuthStore();
-  const { registerName, registerLastName, registerEmail, registerPassword, confirmPassword, registerDui, registerPhone, registerBirthDate, registerResidence, registerDescription, onInputChange:onRegisterInputChange } = useForm( registerFormFields );
   
-  const min = new Date('1950-01-01');
-  const max = new Date('2002-11-25');
+  const {
+    registerName,
+    registerLastName,
+    registerEmail,
+    registerPassword,
+    confirmPassword,
+    registerDui,
+    registerPhone,
+    registerBirthDate,
+    registerResidence,
+    registerDescription,
+    onInputChange:onRegisterInputChange
+  } = useForm( RegisterFormFields.formFields );
   
   const registerSubmit = ( event ) => {
     event.preventDefault();
     
     let errorMsg = '';
-  
-    const duiValidation = registerDui.length !== 9;
-    const phoneValidation = registerPhone.length !== 8;
-    const passwordValidation = registerPassword !== confirmPassword;
-    const birthDateValidation = !(new Date(registerBirthDate) > min && max < new Date(registerBirthDate));
     
-    if(birthDateValidation) {
+    if(RegisterFormFields.birthDateValidation(registerBirthDate)) {
       errorMsg += 'La fecha de nacimiento debe ser coherente.';
     }
   
-    if(phoneValidation) {
+    if(RegisterFormFields.phoneValidation(registerPhone)) {
       errorMsg += '<br>El número de teléfono debe tener 8 dígitos.';
     }
   
-    if(duiValidation) {
+    if(RegisterFormFields.duiValidation(registerDui)) {
       errorMsg += '<br>El DUI debe tener 9 dígitos.';
     }
     
-    if(passwordValidation) {
+    if(RegisterFormFields.passwordValidation(registerPassword, confirmPassword)) {
       errorMsg += '<br>Las contraseñas deben coincidir.';
     }
     
-    if(birthDateValidation || phoneValidation || duiValidation || passwordValidation) {
+    if(
+      RegisterFormFields.birthDateValidation(registerBirthDate) ||
+      RegisterFormFields.phoneValidation(registerPhone) ||
+      RegisterFormFields.duiValidation(registerDui) ||
+      RegisterFormFields.passwordValidation(registerPassword, confirmPassword)
+    ) {
       Swal.fire('Error en registro', errorMsg, 'error');
       return;
     }
@@ -100,7 +83,6 @@ const RegisterForm = () => {
       });
     }
   }, [errorMessage])
-
 
   return(
     <main className="flex justify-center items-center bg-slate-200">
@@ -139,7 +121,7 @@ const RegisterForm = () => {
                 name="registerBirthDate"
                 value={ registerBirthDate }
                 onChange={ onRegisterInputChange }
-                onKeyDown={ calendarKeyDown }
+                onKeyDown={ RegisterFormFields.calendarKeyDown }
                 type="date"
                 id="birthDate"
                 required="required"
@@ -151,8 +133,8 @@ const RegisterForm = () => {
                 name="registerDui"
                 value={ registerDui }
                 onChange={ onRegisterInputChange }
-                onKeyDown={ duiKeyDown }
-                type="number"
+                onKeyDown={ (e) => RegisterFormFields.duiKeyDown(registerDui, e) }
+                type="text"
                 id="documentNumber"
                 placeholder="#########"
                 required="required"
@@ -164,8 +146,8 @@ const RegisterForm = () => {
                 name="registerPhone"
                 value={ registerPhone }
                 onChange={ onRegisterInputChange }
-                onKeyDown={ phoneKeyDown }
-                type="number"
+                onKeyDown={ (e) => RegisterFormFields.phoneKeyDown(registerPhone, e) }
+                type="text"
                 id="phoneNumber"
                 placeholder="########"
                 required="required"
@@ -236,7 +218,7 @@ const RegisterForm = () => {
             type="submit"
             className="mt-5 bg-green-700 w-full h-10 cursor-pointer text-white rounded-md hover:bg-green-600 hover:outline outline-2 outline-green-600 outline-offset-2 text-sm"
           > Registrarse </button><br/>
-          <p className="text-lg my-2">¿Ya posees una cuenta? <a href="/login" className="text-green-600">Iniciar sesión</a></p>
+          <p className="text-lg my-2">¿Ya posees una cuenta? <a href={ROUTES.loginPage} className="text-green-600">Iniciar sesión</a></p>
         </form>
       </div>
     </main>

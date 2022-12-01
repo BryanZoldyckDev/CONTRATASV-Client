@@ -14,9 +14,8 @@ export const useAuthStore = () => {
         try {
             const { data } = await API.post('/auth/login',{ email, password });
             localStorage.setItem('token', data.token );
-            localStorage.setItem('user', JSON.stringify(data.user) );
             localStorage.setItem('token-init-date', new Date().getTime() );
-            dispatch( onLogin({ name: data.name, uid: data.uid }) );
+            dispatch( onLogin(data.user) );
             setTimeout(() => {
                 dispatch( clearErrorMessage() );
             }, 10);
@@ -33,9 +32,8 @@ export const useAuthStore = () => {
         try {
             const { data } = await API.post('/users',{name, lastname, email, password, role, dui, phone, birthdate, residence, description});
             localStorage.setItem('token', data.token );
-            localStorage.setItem('user', JSON.stringify(data.user) );
             localStorage.setItem('token-init-date', new Date().getTime() );
-            dispatch( onLogin({ name: data.name, uid: data.uid }) );
+            dispatch( onLogin(data.user) );
             setTimeout(() => {
                 dispatch( clearErrorMessage() );
             }, 10);

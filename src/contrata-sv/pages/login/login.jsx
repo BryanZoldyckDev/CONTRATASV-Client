@@ -3,17 +3,13 @@ import Swal from 'sweetalert2';
 import { useAuthStore, useForm } from '../../../utils/hooks/index.js';
 import { useNavigate } from 'react-router-dom';
 import { BACK_ROLES } from '../../../utils/constants/index.js';
-
-const loginFormFields = {
-  username: '',
-  password: '',
-}
+import { LoginFormFields } from './loginForm.js';
 
 const Login = () => {
   const navigate = useNavigate();
   
-  const { startLogin, errorMessage } = useAuthStore();
-  const { username, password, onInputChange:onLoginInputChange } = useForm( loginFormFields );
+  const { startLogin, user, errorMessage } = useAuthStore();
+  const { username, password, onInputChange:onLoginInputChange } = useForm( LoginFormFields.formFields );
   
   const loginSubmit = ( event ) => {
     event.preventDefault();
@@ -25,19 +21,11 @@ const Login = () => {
       Swal.fire('Error en la autenticación', errorMessage, 'error');
     }
     if( errorMessage === 'SUCCESS' ){
-      const user = JSON.parse(localStorage.getItem('user'));
       Swal.fire('¡Bienvenido a ContrataSV!', '', 'success').then(()=>{
-        navigate(`/${BACK_ROLES[user?.role?.name]}-page`);
+        navigate(`/${BACK_ROLES[user?.role?.name]}`);
       });
     }
   }, [errorMessage])
-
-  let LinksT = [
-      {
-          name: "Iniciar Sesión",
-          url: "/login"
-      }
-  ];
   
   return (
     <main className="flex items-center justify-center h-full">

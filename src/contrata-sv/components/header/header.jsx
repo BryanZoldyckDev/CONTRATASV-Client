@@ -4,52 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { BACK_ROLES, ROLES } from '../../../utils/constants/index.js';
 import { useAuthStore } from '../../../utils/hooks/index.js';
+import { clientLinks, contratistLinks, notSignedInLinks } from './menu-links.js';
 
 const Header = () => {
-	
 	let links = [];
-	
-	const notSignedInLinks = [
-		{
-			name: "Iniciar Sesión",
-			url: "/login"
-		}
-	];
-	
-	const clientLinks = [
-		{
-			name: "Contratos",
-			url: "/client-page/contracts/active"
-		},
-		{
-			name: "Perfil",
-			url: "/client-page/profile"
-		},
-		{
-			name: "Servicios",
-			url: "/client-page/services"
-		},
-		{
-			name: "Solictudes",
-			url: "/client-page/requests/pending"
-		},
-	];
-	
-	const contratistLinks = [
-		{
-			name: "Actividad",
-			url: "/contratist-page/activities"
-		},
-		{
-			name: "Perfil",
-			url: "/contratist-page/profile"
-		},
-		{
-			name: "Solicitudes",
-			url: "/contratist-page/requests/pending"
-		},
-	];
-	
 	const navigate = useNavigate();
 	
 	const EnterHandler = (route, e) => {
@@ -61,18 +19,13 @@ const Header = () => {
 	};
 	
 	const [ showMenu, setShowMenu ] = useState(false);
-	const [ user, setUser ] = useState({});
-	const { startLogout } = useAuthStore();
+	const { startLogout, user } = useAuthStore();
 	
-	useEffect(() => {
-		setUser(JSON.parse(localStorage.getItem('user')));
-	}, [localStorage.getItem('user')]);
-	
-	if(user !== {} && user?.role?.name === ROLES.client){
+	if(user && user?.role?.name === ROLES.client){
 		links = clientLinks;
 	}
 	
-	else if(user !== {} && user?.role?.name === ROLES.contratist){
+	else if(user && user?.role?.name === ROLES.contratist){
 		links = contratistLinks;
 	}
 	
@@ -83,13 +36,13 @@ const Header = () => {
 	return (
 		<nav className='sticky top-0 left-0 bg-green-800 w-full shadow'>
 			<div className='container m-auto flex justify-between items-center text-white'>
-				<Link to={ user !== {} && user?.role?.name === ROLES.client || user !== {} && user?.role?.name === ROLES.contratist ? BACK_ROLES[user?.role?.name] + '-page' : '/' } className="flex flex-row pl-8 py-4 text-xl font-bold">CONTRATA<h1 className="text-green-500">SV</h1></Link>
+				<Link to={ user && user?.role?.name === ROLES.client || user && user?.role?.name === ROLES.contratist ? BACK_ROLES[user?.role?.name] : '/' } className="flex flex-row pl-8 py-4 text-xl font-bold">CONTRATA<h1 className="text-green-500">SV</h1></Link>
 				<ul className="hidden md:flex items-center pr-10 text-base font-semibold cursor-pointer">
 					{links.map((link, index) => (
 						<li className="px-4 py-4 hover:bg-green-700" key={index} onClick={EnterHandler.bind(this, link.url)}>{link.name}</li>
 					))}
 					{
-						user !== {} && user?.role?.name === ROLES.client || user !== {} && user?.role?.name === ROLES.contratist
+						user && user?.role?.name === ROLES.client || user && user?.role?.name === ROLES.contratist
 							?
 							<div className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded" onClick={startLogout}>
 								<h2>Cerrar sesión</h2>
@@ -109,7 +62,7 @@ const Header = () => {
 								<li className="px-4 py-4 hover:bg-green-700" key={index} onClick={EnterHandler.bind(this, link.url)}>{link.name}</li>
 							))}
 							{
-								user !== {} && user?.role?.name === ROLES.client || user !== {} && user?.role?.name === ROLES.contratist
+								user && user?.role?.name === ROLES.client || user && user?.role?.name === ROLES.contratist
 									?
 									<div className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded" onClick={startLogout}>
 										<h2>Cerrar sesión</h2>

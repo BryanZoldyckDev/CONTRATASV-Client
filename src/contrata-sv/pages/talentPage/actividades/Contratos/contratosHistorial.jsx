@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ROUTES } from '../../../../../utils/router/routes.js';
 
 const ContracsHistorial = () => {
     return (
@@ -8,10 +9,10 @@ const ContracsHistorial = () => {
                 <div className="flex flex-col justify-center items-center h-auto">
                     <div className="bg-white rounded-lg shadow-lg p-8 m-4">
                         <div className="flex justify-between items-center">
-                            <Link to="/talentPage/actividades/contratos/activas" className="py-2 px-4 rounded bg-white hover:bg-gray-500 text-black font-bold">
+                            <Link to={ROUTES.contratistActivitiesContractsActivePage} className="py-2 px-4 rounded bg-white hover:bg-gray-500 text-black font-bold">
                                 Activas
                             </Link>
-                            <Link to="/talentPage/actividades/contratos/historial" className="py-2 px-4 rounded bg-green-700 hover:bg-green-900 text-white font-bold">
+                            <Link to={ROUTES.contratistActivitiesContractsArchivedPage} className="py-2 px-4 rounded bg-green-700 hover:bg-green-900 text-white font-bold">
                                 Historial
                             </Link>
                             
