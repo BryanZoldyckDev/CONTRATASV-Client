@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../store/index.js';
 
-import HomePage from '../../contrata-sv/pages/shared/home/HomePage.jsx';
+// import HomePage from '../../contrata-sv/pages/shared/home/HomePage.jsx';
 import Error from '../../contrata-sv/pages/shared/404/notFound.jsx';
 import Login from '../../contrata-sv/pages/public/login/login.jsx';
 import RegisterMain from '../../contrata-sv/pages/public/register/registerMain.jsx';
@@ -27,7 +27,7 @@ import { ROUTES } from './routes.js';
 import Offer from '../../contrata-sv/pages/contratist/offer/offer.jsx';
 
 const publicRoutes = [
-	{ path: '/', element: <HomePage /> },
+	// { path: '/', element: <HomePage /> },
 	{ path: ROUTES.loginPage, element: <Login /> },
 	{ path: ROUTES.registerPage, element: <RegisterMain /> },
 	{ path: '/register/:type', element: <RegisterForm /> },
