@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../store/index.js';
 
-// import HomePage from '../../contrata-sv/pages/shared/home/HomePage.jsx';
+import HomePage from '../../contrata-sv/pages/shared/home/homePage.jsx';
 import Error from '../../contrata-sv/pages/shared/404/notFound.jsx';
 import Login from '../../contrata-sv/pages/public/login/login.jsx';
 import RegisterMain from '../../contrata-sv/pages/public/register/registerMain.jsx';
@@ -27,14 +27,14 @@ import { ROUTES } from './routes.js';
 import Offer from '../../contrata-sv/pages/contratist/offer/offer.jsx';
 
 const publicRoutes = [
-	// { path: '/', element: <HomePage /> },
+	{ path: '/', element: <HomePage /> },
 	{ path: ROUTES.loginPage, element: <Login /> },
 	{ path: ROUTES.registerPage, element: <RegisterMain /> },
 	{ path: '/register/:type', element: <RegisterForm /> },
 ];
 
 const privateRoutes = [
-	// { path: ROUTES.contratistPage, element: <HomePage />, type: ROLES.contratist },
+	{ path: ROUTES.contratistPage, element: <HomePage />, type: ROLES.contratist },
 	{ path: ROUTES.contratistOfferPage, element: <Offer />, type: ROLES.contratist },
 	{ path: ROUTES.contratistOffersPage, element: <OffersPage />, type: ROLES.contratist },
 	{ path: ROUTES.contratistActivitiesPage, element: <ActP />, type: ROLES.contratist },
@@ -42,7 +42,7 @@ const privateRoutes = [
 	{ path: '/contratist/activities/contracts/:status', element: <ContracsPageAct />, type: ROLES.contratist },
 	{ path: '/contratist/requests/:status', element: <SolicitudesP />, type: ROLES.contratist },
 	{ path: ROUTES.profilePage, element: <ProfileUser /> },
-	// { path: ROUTES.clientPage, element: <HomePage />, type: ROLES.client },
+	{ path: ROUTES.clientPage, element: <HomePage />, type: ROLES.client },
 	{ path: '/client/contracts/:status', element: <ContratosUser />, type: ROLES.client },
 	{ path: ROUTES.clientServicesPage, element: <ServiciosUser />, type: ROLES.client },
 	{ path: '/client/requests/:status', element: <SolicitudesUser />, type: ROLES.client },
