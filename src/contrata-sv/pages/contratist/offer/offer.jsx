@@ -8,6 +8,8 @@ import { OfferService } from './offer.service.js';
 import { BACK_PAYMENT, PAYMENT } from '../../../../utils/constants/payment.js';
 import { useEffect } from 'react';
 import { ProffesionService } from '../../public/register/proffesion.service.js';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../../utils/router/routes.js';
 
 const Offer = () => {
 	
@@ -28,6 +30,8 @@ const Offer = () => {
 		makeOffer();
 	}
 	
+	const navigate = useNavigate();
+	
 	const makeOffer = async () => {
 		const data = await OfferService.addOffer({
 			title: offerTitle,
@@ -39,15 +43,13 @@ const Offer = () => {
 			description: offerDescription
 		})
 		
-		console.log(data)
-		
 		if(data?.msg){
 			Swal.fire('error', data?.msg, 'error');
 		}
 		
 		else{
 			Swal.fire('Oferta registrada', 'La oferta ha sido registrada exitosamente.', 'success').then(() => {
-				window.location.reload();
+				navigate(ROUTES.contratistOffersPage);
 			});
 		}
 	}
