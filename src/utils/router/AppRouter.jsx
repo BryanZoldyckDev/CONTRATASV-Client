@@ -34,7 +34,7 @@ const publicRoutes = [
 ];
 
 const privateRoutes = [
-	{ path: ROUTES.contratistPage, element: <HomePage />, type: ROLES.contratist },
+	// { path: ROUTES.contratistPage, element: <HomePage />, type: ROLES.contratist },
 	{ path: ROUTES.contratistOfferPage, element: <Offer />, type: ROLES.contratist },
 	{ path: ROUTES.contratistOffersPage, element: <OffersPage />, type: ROLES.contratist },
 	{ path: ROUTES.contratistActivitiesPage, element: <ActP />, type: ROLES.contratist },
@@ -42,7 +42,7 @@ const privateRoutes = [
 	{ path: '/contratist/activities/contracts/:status', element: <ContracsPageAct />, type: ROLES.contratist },
 	{ path: '/contratist/requests/:status', element: <SolicitudesP />, type: ROLES.contratist },
 	{ path: ROUTES.profilePage, element: <ProfileUser /> },
-	{ path: ROUTES.clientPage, element: <HomePage />, type: ROLES.client },
+	// { path: ROUTES.clientPage, element: <HomePage />, type: ROLES.client },
 	{ path: '/client/contracts/:status', element: <ContratosUser />, type: ROLES.client },
 	{ path: ROUTES.clientServicesPage, element: <ServiciosUser />, type: ROLES.client },
 	{ path: '/client/requests/:status', element: <SolicitudesUser />, type: ROLES.client },
